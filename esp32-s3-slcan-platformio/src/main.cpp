@@ -1,11 +1,11 @@
 // -------------------------------------------------------------
-// esp32-slcan for esp32 C3 - poc code
+// esp32-slcan for esp32 S3 - poc code
 // -------------------------------------------------------------
 // by beachviking
 //
 // Inspired by https://github.com/mintynet/teensy-slcan by mintynet
 //
-// This example uses the CAN feather shield from SKPANG for a generic ESP32-C3
+// This example uses the CAN feather shield from SKPANG for a generic ESP32-S3
 // module.
 // http://skpang.co.uk/catalog/canbus-featherwing-for-esp32-p-1556.html
 
@@ -13,8 +13,8 @@
 #include <Arduino.h>
 #include "driver/twai.h"
 
-#define ESP_CAN_RX GPIO_NUM_3
-#define ESP_CAN_TX GPIO_NUM_2
+#define ESP_CAN_RX GPIO_NUM_4
+#define ESP_CAN_TX GPIO_NUM_5
 
 // default values
 boolean slcan     = true;
@@ -98,7 +98,7 @@ bool send_canmsg(char *buf, boolean ext, boolean rtr) {
     }      
   }
 
-  // message.ss = true;
+  message.ss = true;
 
   //Queue message for transmission
   return(twai_transmit(&message, 0) == ESP_OK);
@@ -286,7 +286,7 @@ void slcan_ack()
 
 void slcan_nack()
 {
-  Serial.write("\a\r",2);
+  Serial.write('\a');
 } // slcan_nack()
 
 // -------------------------------------------------------------
